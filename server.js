@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 // Раздача статичных файлов из папки public
 app.use(express.static('public'));
 
-// Маршрут для обработки запроса к OpenAI API
+// Ма краткий
 app.post('/api/chat', async (req, res) => {
   const message = req.body.message;
   if (!message) {
