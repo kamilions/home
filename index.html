@@ -11,83 +11,275 @@
 </head>
 
 <body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+    <p>Загрузка...</p>
+  </div>
+  
+  <!-- Фиксированное меню -->
   <header>
-    <img src="logo.png" alt="Logo">
-    <h1>Kamilio</h1>
+    <nav>
+      <ul>
+        <li><a href="#hero">Главная</a></li>
+        <li><a href="#features">Фишки</a></li>
+        <li><a href="#services">Сервисы</a></li>
+        <li><a href="#gallery">Галерея</a></li>
+        <li><a href="#testimonials">Отзывы</a></li>
+        <li><a href="#footer">Контакты</a></li>
+      </ul>
+    </nav>
   </header>
-  <nav>
-    <a href="/" id="current">Children</a>
-    <a href="teenagers">Teenagers</a>
-    <div id="dropdown">
-      <a tabindex="0" class="dropdown-title">Adults</a>
-      <div id="submenu-container">
-        <div id="submenu">
-          <a href="adults-elementary">Elementary</a>
-          <a href="adults-other">Other</a>
-        </div>
+  
+  <!-- Hero Section -->
+  <section id="hero">
+    <canvas id="particle-canvas"></canvas>
+    <div class="hero-content">
+      <h1>Добро пожаловать на наш сайт!</h1>
+      <p>Откройте для себя множество анимаций и инновационных решений</p>
+      <button id="toggleTheme">Переключить тему</button>
+    </div>
+  </section>
+  
+  <!-- Секция «Фишки» -->
+  <section id="features">
+    <h2>Наши Фишки</h2>
+    <div class="features-container">
+      <div class="feature-card">
+        <h3>Анимация</h3>
+        <p>Великолепные анимации для привлечения внимания пользователя.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Интерактив</h3>
+        <p>Удобное и интуитивное управление с помощью JavaScript-скриптов.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Функциональность</h3>
+        <p>Различные фишки для улучшения опыта работы с сайтом.</p>
       </div>
     </div>
-  </nav>
-  <main>
-    <form autocomplete="off">
-      <h1>Children</h1>
-      <fieldset>
-        <legend>Listening</legend>
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <output></output>
-      </fieldset>
-      <fieldset>
-        <legend>Speaking</legend>
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <output></output>
-      </fieldset>
-      <fieldset>
-        <legend>Reading</legend>
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <output></output>
-      </fieldset>
-      <fieldset>
-        <legend>Writing</legend>
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <output></output>
-      </fieldset>
-      <fieldset>
-        <legend>Behavior</legend>
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <output></output>
-      </fieldset>
-      <fieldset>
-        <legend>Homework</legend>
-        <input type="number" step="any" min="0" max="60">
-        <input type="number" step="any" min="0" max="60">
-        <output></output>
-      </fieldset>
-      <div>
-        <button type="button">Calculate</button>
-        <output></output>
-        <button type="reset">Reset</button>
+  </section>
+  
+  <!-- Секция «Сервисы» -->
+  <section id="services">
+    <h2>Наши Сервисы</h2>
+    <div class="services-container">
+      <div class="service-card">
+        <h3>Дизайн</h3>
+        <p>Изысканный дизайн и креативные решения для вашего бизнеса.</p>
       </div>
-    </form>
-  </main>
-  <footer>
-    Share on <a href="https://t.me/share/url?url=https%3A%2F%2Fclassactivitycalculator.github.io&text=Class%20Activity%20Calculator%3A%20Calculate%20the%20class%20activity%20grades%20of%20the%20ILI%20students." target="_blank" title="Telegram: Share Web Page">Telegram</a> |
-    <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fclassactivitycalculator.github.io&t=Class%20Activity%20Calculator%3A%20Calculate%20the%20class%20activity%20grades%20of%20the%20ILI%20students." target="_blank" title="Post to Facebook">Facebook</a>
-    <address>Created by <a href="https://mori.pages.dev" title="Mori" rel="author">Mori</a></address>
+      <div class="service-card">
+        <h3>Разработка</h3>
+        <p>Современные технологии и индивидуальный подход к каждому проекту.</p>
+      </div>
+      <div class="service-card">
+        <h3>Поддержка</h3>
+        <p>Профессиональная поддержка и обслуживание 24/7 для наших клиентов.</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Секция «Галерея» -->
+  <section id="gallery">
+    <h2>Галерея Работ</h2>
+    <div class="gallery-container">
+      <div class="gallery-item"><img src="https://picsum.photos/seed/1/300/200" alt="Gallery Image 1"></div>
+      <div class="gallery-item"><img src="https://picsum.photos/seed/2/300/200" alt="Gallery Image 2"></div>
+      <div class="gallery-item"><img src="https://picsum.photos/seed/3/300/200" alt="Gallery Image 3"></div>
+      <div class="gallery-item"><img src="https://picsum.photos/seed/4/300/200" alt="Gallery Image 4"></div>
+      <div class="gallery-item"><img src="https://picsum.photos/seed/5/300/200" alt="Gallery Image 5"></div>
+      <div class="gallery-item"><img src="https://picsum.photos/seed/6/300/200" alt="Gallery Image 6"></div>
+    </div>
+  </section>
+  
+  <!-- Секция «Отзывы» -->
+  <section id="testimonials">
+    <h2>Отзывы Клиентов</h2>
+    <div class="testimonial-slider">
+      <div class="testimonial active">
+        <p>"Отличный сервис! Рекомендую всем!"</p>
+        <h4>Иван Иванов</h4>
+      </div>
+      <div class="testimonial">
+        <p>"Замечательный опыт. Всё работает идеально."</p>
+        <h4>Мария Петрова</h4>
+      </div>
+      <div class="testimonial">
+        <p>"Инновационные анимации и профессиональный подход."</p>
+        <h4>Алексей Смирнов</h4>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Модальное окно для информации -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Подробнее</h2>
+      <p>Здесь вы можете разместить дополнительную информацию о выбранном элементе.</p>
+    </div>
+  </div>
+  
+  <!-- Кнопка возврата наверх -->
+  <button id="scrollToTop">&#8679;</button>
+  
+  <!-- Footer -->
+  <footer id="footer">
+    <p>&copy; 2025 Ваш сайт. Все права защищены.</p>
   </footer>
-  <script src="script.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      /* Preloader: исчезновение после загрузки */
+      window.addEventListener("load", function() {
+        const preloader = document.getElementById("preloader");
+        preloader.style.transition = "opacity 0.5s ease-out";
+        preloader.style.opacity = "0";
+        setTimeout(function() {
+          preloader.style.display = "none";
+        }, 500);
+      });
+      
+      /* Переключение темы */
+      document.getElementById("toggleTheme").addEventListener("click", function() {
+        document.body.classList.toggle("dark");
+      });
+      
+      /* Плавная прокрутка при клике на меню */
+      document.querySelectorAll("nav ul li a").forEach(link => {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href").substring(1);
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+      
+      /* Параллакс-эффект для hero-контента */
+      window.addEventListener("scroll", () => {
+        const heroContent = document.querySelector(".hero-content");
+        let scrolled = window.pageYOffset;
+        heroContent.style.transform = "translateY(" + (scrolled * 0.5) + "px)";
+        
+        // Отображение кнопки возврата наверх
+        const scrollBtn = document.getElementById("scrollToTop");
+        if (window.pageYOffset > 300) {
+          scrollBtn.classList.add("active");
+        } else {
+          scrollBtn.classList.remove("active");
+        }
+      });
+      
+      /* Система частиц в canvas */
+      const canvas = document.getElementById("particle-canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      let particles = [];
+      const particleCount = 100;
+      
+      function Particle(x, y, dx, dy, size, color) {
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+        this.size = size;
+        this.color = color;
+      }
+      Particle.prototype.draw = function() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      };
+      Particle.prototype.update = function() {
+        if (this.x + this.size > canvas.width || this.x - this.size < 0) {
+          this.dx = -this.dx;
+        }
+        if (this.y + this.size > canvas.height || this.y - this.size < 0) {
+          this.dy = -this.dy;
+        }
+        this.x += this.dx;
+        this.y += this.dy;
+        this.draw();
+      };
+      
+      function initParticles() {
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+          let size = Math.random() * 3 + 1;
+          let x = Math.random() * (canvas.width - size * 2) + size;
+          let y = Math.random() * (canvas.height - size * 2) + size;
+          let dx = (Math.random() - 0.5) * 2;
+          let dy = (Math.random() - 0.5) * 2;
+          let color = "rgba(255,255,255,0.8)";
+          particles.push(new Particle(x, y, dx, dy, size, color));
+        }
+      }
+      
+      function animateParticles() {
+        requestAnimationFrame(animateParticles);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(particle => particle.update());
+      }
+      
+      initParticles();
+      animateParticles();
+      
+      window.addEventListener("resize", function() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initParticles();
+      });
+      
+      /* IntersectionObserver для плавного появления элементов */
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll(".feature-card, .service-card, .gallery-item").forEach(item => {
+        observer.observe(item);
+      });
+      
+      /* Обработка модального окна: открытие по клику на карточку (фишки) */
+      const modal = document.getElementById("modal");
+      const closeModalBtn = document.querySelector(".close-button");
+      document.querySelectorAll(".feature-card, .service-card").forEach(card => {
+        card.addEventListener("click", function() {
+          modal.style.display = "block";
+        });
+      });
+      closeModalBtn.addEventListener("click", function() {
+        modal.style.display = "none";
+      });
+      window.addEventListener("click", function(e) {
+        if (e.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+      
+      /* Слайдер отзывов */
+      const testimonials = document.querySelectorAll(".testimonial");
+      let currentTestimonial = 0;
+      setInterval(function() {
+        testimonials[currentTestimonial].classList.remove("active");
+        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        testimonials[currentTestimonial].classList.add("active");
+      }, 5000);
+      
+      /* Кнопка возврата наверх */
+      document.getElementById("scrollToTop").addEventListener("click", function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      
+    });
+  </script>
 </body>
-
+  
 </html>
