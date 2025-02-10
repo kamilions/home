@@ -1,13 +1,3 @@
----
-title: Купить Korepi
-icon: credit_card  
-category: Seller  
-tag: Начало  
-author:  
-  name: "QweRez"  
-  url: "https://github.com/qwerezon/"  
-order: 1  
----
 
 <html lang="ru">
 <head>
