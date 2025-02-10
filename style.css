@@ -2,184 +2,413 @@ html,
 body {
   margin: 0;
   padding: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
 }
 
+/* Preloader */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Фиксированное меню */
 header {
-  padding: 16px 0;
-  text-align: center;
-  background: linear-gradient(#999, #333);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 0;
 }
 
-img {
-  width: 36px;
-  height: 36px;
-  vertical-align: bottom;
-}
-
-header h1 {
-  font-size: 1.25rem;
-  font-family: 'Times New Roman';
-  color: #FFF;
-  text-shadow: 0 3px #000;
-  letter-spacing: 1px;
-}
-
-nav {
+nav ul {
+  list-style: none;
   display: flex;
   justify-content: center;
-  column-gap: 15px;
-  background: #333;
-  border-top: 2px solid #000;
+  margin: 0;
+  padding: 0;
 }
 
-a {
-  color: #FFF;
+nav ul li {
+  margin: 0 15px;
+  position: relative;
 }
 
-nav a {
-  padding: 12px 6px;
-  font: bold 0.75rem Verdana;
+nav ul li a {
   text-decoration: none;
-  outline: 0;
-  transition: 280ms ease-out 120ms;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
-nav > a,
-.dropdown-title {
-  border-top: 2px solid #000;
-  margin-top: -2px;
+nav ul li a:hover {
+  color: #ffd700;
 }
 
-nav > a:hover,
-#dropdown:hover .dropdown-title,
-nav > a:focus,
-#dropdown:focus-within .dropdown-title,
-#current {
-  border-top-color: #A00;
-}
-
-#dropdown a {
+/* Эффект подчеркивания при наведении */
+nav ul li a::after {
+  content: "";
   display: block;
+  width: 0;
+  height: 2px;
+  background: #ffd700;
+  transition: width 0.3s;
 }
 
-.dropdown-title::after {
-  content: '';
-  display: inline-block;
-  border-style: solid;
-  border-width: 0 1px 1px 0;
-  padding: 2px;
-  transform: translateY(-50%) rotate(45deg);
-  margin-left: 1ch;
+nav ul li a:hover::after {
+  width: 100%;
 }
 
-#submenu-container {
-  display: grid;
-  position: absolute;
-}
-
-#submenu {
-  height: 0;
+/* Hero Section */
+#hero {
+  position: relative;
   overflow: hidden;
-  background: #333;
-  transition: 280ms ease-out 120ms;
-}
-
-#dropdown:hover #submenu,
-#dropdown:focus-within #submenu {
-  height: 100%;
-}
-
-#submenu a:hover,
-#submenu a:focus {
-  background: #A00;
-}
-
-main,
-form div {
+  min-height: 100vh;
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-form {
-  margin: 32px auto;
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-form h1 {
-  font-size: 1rem;
-  margin-bottom: 18px;
-  margin-left: 12px;
+#particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
-fieldset {
-  margin: 0 0 16px;
-  padding: 12px 12px 0;
-  border: 1px solid #CCC;
-  background: linear-gradient(#FFF, #CCC);
+.hero-content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+  padding: 20px;
+  animation: fadeIn 2s ease forwards;
 }
 
-form h1,
-legend,
-input,
-output,
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-content h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.3em;
+  margin-bottom: 30px;
+}
+
 button {
-  font-family: Arial;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
-form h1,
-legend,
-button {
-  color: #333;
+button:hover {
+  transform: scale(1.05);
 }
 
-legend {
-  padding: 0 4px;
-  font-size: 0.875rem;
+/* Секция «Фишки» */
+#features {
+  padding: 50px 20px;
+  background: var(--section-bg-color);
+  animation: slideIn 1s ease-out;
 }
 
-input,
-button,
-div output {
-  font-size: 0.833rem;
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
-input {
-  width: 4em;
+#features h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5em;
 }
 
-input:invalid {
-  outline: 1px solid #F00;
+.features-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
-output {
-  color: #C00;
+.feature-card {
+  background: var(--card-bg-color);
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-fieldset output {
+.feature-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card h3 {
+  margin-top: 0;
+}
+
+/* Секция «Сервисы» */
+#services {
+  padding: 50px 20px;
+  background: var(--bg-color);
+}
+
+#services h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5em;
+}
+
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.service-card {
+  background: var(--card-bg-color);
+  width: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.service-card.visible {
+  animation: fadeInLeft 0.8s ease-out forwards;
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.service-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+
+.service-card h3 {
+  margin-top: 0;
+}
+
+/* Секция «Галерея» */
+#gallery {
+  padding: 50px 20px;
+  background: var(--section-bg-color);
+}
+
+#gallery h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5em;
+}
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.gallery-item.visible {
+  animation: zoomIn 0.6s ease forwards;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.gallery-item img {
+  width: 100%;
   display: block;
-  margin: 8px 0 8px 6px;
-  font-size: 0.75rem;
+  transition: transform 0.3s;
 }
 
-fieldset output::after {
-  content: "\00A0";
+.gallery-item:hover img {
+  transform: scale(1.05);
 }
 
-/* a placeholder */
-
-div output {
-  margin: auto auto auto 6px;
+/* Секция «Отзывы» */
+#testimonials {
+  padding: 50px 20px;
+  background: var(--bg-color);
+  text-align: center;
 }
 
+#testimonials h2 {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+}
+
+.testimonial-slider {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.testimonial {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease;
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.testimonial.active {
+  opacity: 1;
+}
+
+.testimonial p {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.testimonial h4 {
+  font-size: 1em;
+  color: #555;
+}
+
+/* Модальное окно */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background: var(--card-bg-color);
+  margin: 15% auto;
+  padding: 20px;
+  width: 80%;
+  border-radius: 10px;
+  animation: modalAnimation 0.5s;
+  position: relative;
+}
+
+@keyframes modalAnimation {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.close-button {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: var(--text-color);
+}
+
+.close-button:hover {
+  color: #ff0000;
+}
+
+/* Scroll-to-top кнопка */
+#scrollToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1500;
+}
+
+#scrollToTop.active {
+  opacity: 1;
+}
+
+/* Footer */
 footer {
-  padding: 12px;
-  background: #333;
-  font: 0.75rem Arial;
-  color: #FFF;
-}
-
-footer a {
-  text-underline-position: under;
-}
-
-address {
-  float: right;
+  text-align: center;
+  padding: 20px;
+  background: #333333;
+  color: #ffffff;
 }
