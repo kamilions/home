@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Космос – Симуляция Солнечной системы</title>
+  <link rel="stylesheet" href="space.css">
+</head>
+<body>
+  <header>
+    <h1>Космический портал</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="space.html">Космос</a></li>
+        <li><a href="valentine.html">День влюблённых</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <!-- Обёртка для симуляции, обеспечивающая центровку -->
+    <div class="simulation-container">
+      <div class="solar-system">
+        <!-- Солнце -->
+        <div class="sun">
+          <div class="sun-label">Sun</div>
+        </div>
+        <!-- Орбиты и планеты -->
+        <div class="orbit mercury">
+          <div class="planet">
+            <div class="sphere mercury-sphere"></div>
+            <div class="planet-name">Mercury</div>
+          </div>
+        </div>
+        <div class="orbit venus">
+          <div class="planet">
+            <div class="sphere venus-sphere"></div>
+            <div class="planet-name">Venus</div>
+          </div>
+        </div>
+        <div class="orbit earth">
+          <div class="planet">
+            <div class="sphere earth-sphere"></div>
+            <div class="planet-name">Earth</div>
+          </div>
+        </div>
+        <div class="orbit mars">
+          <div class="planet">
+            <div class="sphere mars-sphere"></div>
+            <div class="planet-name">Mars</div>
+          </div>
+        </div>
+        <div class="orbit jupiter">
+          <div class="planet">
+            <div class="sphere jupiter-sphere"></div>
+            <div class="planet-name">Jupiter</div>
+          </div>
+        </div>
+        <div class="orbit saturn">
+          <div class="planet">
+            <div class="sphere saturn-sphere"></div>
+            <div class="planet-name">Saturn</div>
+          </div>
+        </div>
+        <div class="orbit uranus">
+          <div class="planet">
+            <div class="sphere uranus-sphere"></div>
+            <div class="planet-name">Uranus</div>
+          </div>
+        </div>
+        <div class="orbit neptune">
+          <div class="planet">
+            <div class="sphere neptune-sphere"></div>
+            <div class="planet-name">Neptune</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Панель управления симуляцией -->
+      <div class="controls">
+        <label for="speed">Скорость:</label>
+        <input type="range" id="speed" min="1" max="10" value="5">
+        <button id="toggleBtn">Пауза</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Ваш сайт. Все права защищены.</p>
+  </footer>
+  
+  <script>
+    // После загрузки DOM задаём базовые длительности анимаций для орбит
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('.orbit.mercury').setAttribute('data-base-duration', 5);
+      document.querySelector('.orbit.venus').setAttribute('data-base-duration', 7);
+      document.querySelector('.orbit.earth').setAttribute('data-base-duration', 10);
+      document.querySelector('.orbit.mars').setAttribute('data-base-duration', 12);
+      document.querySelector('.orbit.jupiter').setAttribute('data-base-duration', 15);
+      document.querySelector('.orbit.saturn').setAttribute('data-base-duration', 18);
+      document.querySelector('.orbit.uranus').setAttribute('data-base-duration', 20);
+      document.querySelector('.orbit.neptune').setAttribute('data-base-duration', 22);
+      
+      const speedSlider = document.getElementById('speed');
+      const toggleBtn = document.getElementById('toggleBtn');
+      let isPaused = false;
+      
+      function updateAnimationSpeed() {
+        const speed = speedSlider.value;
+        const orbits = document.querySelectorAll('.orbit');
+        orbits.forEach(orbit => {
+          const baseDuration = orbit.getAttribute('data-base-duration');
+          orbit.style.animationDuration = (baseDuration / speed) + 's';
+        });
+      }
+      
+      speedSlider.addEventListener('input', updateAnimationSpeed);
+      
+      toggleBtn.addEventListener('click', () => {
+        isPaused = !isPaused;
+        const orbits = document.querySelectorAll('.orbit');
+        orbits.forEach(orbit => {
+          orbit.style.animationPlayState = isPaused ? 'paused' : 'running';
+        });
+        toggleBtn.textContent = isPaused ? 'Продолжить' : 'Пауза';
+      });
+      
+      updateAnimationSpeed();
+    });
+  </script>
+</body>
+</html>
