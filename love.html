@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>С Днём влюблённых, Алиса!</title>
+  <link rel="stylesheet" href="valentine.css">
+</head>
+<body>
+  <header>
+    <!-- Заголовок с эффектом волны -->
+    <h1 class="title-wave">С Днём влюблённых, Алиса!</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="valentine.html">Поздравление</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="greeting">
+      <!-- Анимированные сердечки, как ранее -->
+      <div class="heart-container">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+      </div>
+      <div class="greeting-text">
+        <!-- Поздравление с анимацией «волна»: для эффекта каждая буква в имени обернута в span -->
+        <p class="wave-text">
+          Дорогая
+          <span class="wave-letter">А</span>
+          <span class="wave-letter">л</span>
+          <span class="wave-letter">и</span>
+          <span class="wave-letter">с</span>
+          <span class="wave-letter">а</span>,
+        </p>
+        <p class="wave-text">Поздравляю тебя с Днём влюблённых!</p>
+        <p class="wave-text">Пусть каждый миг будет наполнен нежностью, радостью и удивительной любовью.</p>
+        <p class="wave-text">Ты озаряешь мой мир и делаешь его ярче.</p>
+        <p class="wave-text">С любовью,</p>
+        <p class="wave-text signature">Руслан</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Ваш сайт. Все права защищены.</p>
+  </footer>
+  
+  <script>
+    // Дополнительная анимация: падающие сердечки (эффект конфетти)
+    function createFallingHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('falling-heart');
+      heart.innerHTML = '♥';
+      // Случайное горизонтальное положение
+      heart.style.left = Math.random() * 100 + 'vw';
+      // Случайная длительность анимации от 5 до 10 секунд
+      const duration = Math.random() * 5 + 5;
+      heart.style.animationDuration = duration + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      // Случайное смещение по горизонтали
+      heart.style.setProperty('--fall-x', (Math.random() * 200 - 100) + 'px');
+      document.body.appendChild(heart);
+      // Удаляем элемент после завершения анимации
+      setTimeout(() => {
+        heart.remove();
+      }, (duration + 1) * 1000);
+    }
+    
+    // Каждые 700 мс создаём новое падающее сердце
+    setInterval(createFallingHeart, 700);
+  </script>
+</body>
+</html>
