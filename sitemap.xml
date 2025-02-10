@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>https://classactivitycalculator.github.io/</loc>
-</url>
-<url>
-<loc>https://classactivitycalculator.github.io/teenagers</loc>
-</url>
-<url>
-<loc>https://classactivitycalculator.github.io/adults-elementary</loc>
-</url>
-<url>
-<loc>https://classactivitycalculator.github.io/adults-other</loc>
-</url>
+  <url>
+    <loc>https://classactivitycalculator.github.io/</loc>
+  </url>
+  <url>
+    <loc>https://classactivitycalculator.github.io/teenagers.html</loc>
+  </url>
+  <url>
+    <loc>https://classactivitycalculator.github.io/adults-elementary.html</loc>
+  </url>
+  <url>
+    <loc>https://classactivitycalculator.github.io/adults-other.html</loc>
+  </url>
 </urlset>
