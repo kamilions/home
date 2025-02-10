@@ -1,18 +1,35 @@
-/* Глобальный сброс и базовые стили */
-html, body {
+/* Основные CSS-переменные для светлой и тёмной темы */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --section-bg-color: #f4f4f4;
+  --card-bg-color: #ffffff;
+  --primary-color: #1d72b8;
+}
+body.dark {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --section-bg-color: #1f1f1f;
+  --card-bg-color: #2c2c2c;
+}
+body {
   margin: 0;
   padding: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
   font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
 }
 
-/* Прелоадер */
+/* Preloader */
 #preloader {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #fff;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +40,7 @@ html, body {
   width: 50px;
   height: 50px;
   border: 5px solid #ccc;
-  border-top: 5px solid #1d72b8;
+  border-top: 5px solid var(--primary-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -32,110 +49,122 @@ html, body {
   to { transform: rotate(360deg); }
 }
 
-/* Шапка */
+/* Шапка и Меню */
 header {
   background: linear-gradient(#999, #333);
-  padding: 16px 0;
-  text-align: center;
-  position: relative;
-  z-index: 1001;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
-.header-container {
+.header-top {
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  margin-bottom: 5px;
 }
-header img {
+.header-top img {
   width: 36px;
   height: 36px;
   vertical-align: bottom;
 }
-header h1 {
+.header-top h1 {
   font-size: 1.5rem;
   font-family: 'Times New Roman', serif;
   color: #fff;
   text-shadow: 0 3px #000;
   letter-spacing: 1px;
+  margin: 0;
 }
-
-/* Навигация */
-nav {
+nav ul {
+  list-style: none;
   display: flex;
   justify-content: center;
-  gap: 15px;
-  background: #333;
-  border-top: 2px solid #000;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  margin: 0 15px;
   position: relative;
 }
-nav a, .dropdown-title {
-  padding: 12px 6px;
-  font: bold 0.85rem Verdana;
-  color: #fff;
+nav ul li a,
+.dropdown-title {
   text-decoration: none;
-  outline: 0;
-  transition: 280ms ease-out 120ms;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 6px;
   border-top: 2px solid #000;
+  transition: color 0.3s;
 }
-nav a:hover,
-#dropdown:hover .dropdown-title,
-nav a:focus,
-#dropdown:focus-within .dropdown-title,
-#current {
+nav ul li a:hover,
+nav ul li a:focus,
+.dropdown-title:hover,
+.dropdown-title:focus {
+  color: #ffd700;
   border-top-color: #A00;
 }
+/* Подчеркивание при наведении */
+nav ul li a::after,
+.dropdown-title::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #ffd700;
+  transition: width 0.3s;
+}
+nav ul li a:hover::after,
+.dropdown-title:hover::after {
+  width: 100%;
+}
+/* Dropdown стили */
 #dropdown {
   position: relative;
 }
-#dropdown a {
-  display: block;
-}
-.dropdown-title::after {
-  content: '';
-  display: inline-block;
-  border-style: solid;
-  border-width: 0 1px 1px 0;
-  padding: 2px;
-  transform: translateY(-50%) rotate(45deg);
-  margin-left: 4px;
-}
-#submenu-container {
-  display: none;
+#dropdown ul {
   position: absolute;
   top: 100%;
   left: 0;
-  width: max-content;
+  background: #333;
+  border: 1px solid #000;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: none;
+  min-width: 120px;
 }
-#dropdown:focus-within #submenu-container,
-#dropdown:hover #submenu-container {
+#dropdown:hover ul,
+#dropdown:focus-within ul {
   display: block;
 }
-#submenu {
-  background: #333;
-}
-#submenu a:hover,
-#submenu a:focus {
-  background: #A00;
+#dropdown ul li a {
+  padding: 10px;
+  display: block;
+  white-space: nowrap;
 }
 
-/* Hero Section с анимированным градиентом и частицами */
+/* Hero Section */
 #hero {
   position: relative;
-  width: 100%;
-  height: 70vh;
+  overflow: hidden;
+  min-height: 100vh;
   background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
   background-size: 400% 400%;
   animation: gradientAnimation 15s ease infinite;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  padding-top: 80px;
 }
 @keyframes gradientAnimation {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+/* Canvas для частиц */
 #particle-canvas {
   position: absolute;
   top: 0;
@@ -144,57 +173,67 @@ nav a:focus,
   height: 100%;
   z-index: 1;
 }
-.hero-overlay {
+/* Контент в hero */
+.hero-content {
   position: relative;
-  z-index: 2;
   text-align: center;
+  z-index: 2;
+  padding: 20px;
+  animation: fadeIn 2s ease forwards;
   color: #fff;
-  animation: fadeIn 2s ease-out;
 }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.hero-overlay h2 {
-  font-size: 2rem;
+.hero-content h1 {
+  font-size: 2.5rem;
   margin-bottom: 10px;
 }
-.hero-overlay p {
+.hero-content p {
   font-size: 1.2rem;
   margin-bottom: 20px;
 }
-#scrollDown {
+/* Кнопка для перехода к калькулятору */
+#scrollToCalculator {
   padding: 10px 20px;
+  font-size: 16px;
   border: none;
   border-radius: 5px;
-  background: #1d72b8;
-  color: #fff;
   cursor: pointer;
+  background-color: var(--primary-color);
+  color: #fff;
   transition: transform 0.3s;
 }
-#scrollDown:hover {
+#scrollToCalculator:hover {
   transform: scale(1.05);
 }
 
-/* Основной контент – калькулятор */
-main#calculator {
-  padding: 40px 20px;
+/* Секция калькулятора */
+#calculator {
+  padding: 50px 20px;
+  background: var(--section-bg-color);
+}
+#calculator h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+#calculator form {
   max-width: 800px;
   margin: 0 auto;
-}
-main#calculator form {
-  background: #f9f9f9;
+  background: var(--card-bg-color);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-main#calculator form h1 {
+#calculator form h1 {
   font-size: 1.5rem;
   margin-bottom: 20px;
   text-align: center;
 }
 fieldset {
-  margin: 0 0 16px;
+  margin-bottom: 16px;
   padding: 12px;
   border: 1px solid #CCC;
   background: linear-gradient(#FFF, #EEE);
@@ -216,57 +255,38 @@ fieldset output {
   font-size: 0.9rem;
   color: #C00;
 }
-.form-buttons {
+/* Кнопки формы */
+form > div {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
 }
-.form-buttons button {
+form button {
   padding: 10px 15px;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background: #1d72b8;
+  background: var(--primary-color);
   color: #fff;
   transition: transform 0.3s;
 }
-.form-buttons button:hover {
+form button:hover {
   transform: scale(1.05);
 }
-.form-buttons output.final-output {
+form output.final-output {
   font-weight: bold;
   margin-left: 10px;
 }
 
-/* Футер */
-footer {
-  background: #333;
-  color: #FFF;
-  padding: 12px;
-  text-align: center;
-}
-footer a {
-  color: #FFD700;
-  text-decoration: none;
-}
-footer a:hover {
-  text-decoration: underline;
-}
-footer address {
-  float: right;
-  font-style: normal;
-  margin-right: 10px;
-}
-
-/* Кнопка «Прокрутить наверх» */
+/* Кнопка "Прокрутить наверх" */
 #scrollToTop {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  background: #1d72b8;
+  background-color: var(--primary-color);
   color: #fff;
   border: none;
   padding: 10px 15px;
@@ -278,4 +298,24 @@ footer address {
 }
 #scrollToTop.active {
   opacity: 1;
+}
+
+/* Футер */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #333333;
+  color: #ffffff;
+}
+footer a {
+  color: #ffd700;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+footer .social,
+footer address {
+  margin-top: 10px;
+  font-size: 0.9rem;
 }
