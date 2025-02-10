@@ -1,67 +1,95 @@
-html,
-body {
+/* Глобальный сброс и базовые стили */
+html, body {
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
 }
 
+/* Прелоадер */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-top: 5px solid #1d72b8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Шапка */
 header {
+  background: linear-gradient(#999, #333);
   padding: 16px 0;
   text-align: center;
-  background: linear-gradient(#999, #333);
+  position: relative;
+  z-index: 1001;
 }
-
-img {
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+header img {
   width: 36px;
   height: 36px;
   vertical-align: bottom;
 }
-
 header h1 {
-  font-size: 1.25rem;
-  font-family: 'Times New Roman';
-  color: #FFF;
+  font-size: 1.5rem;
+  font-family: 'Times New Roman', serif;
+  color: #fff;
   text-shadow: 0 3px #000;
   letter-spacing: 1px;
 }
 
+/* Навигация */
 nav {
   display: flex;
   justify-content: center;
-  column-gap: 15px;
+  gap: 15px;
   background: #333;
   border-top: 2px solid #000;
+  position: relative;
 }
-
-a {
-  color: #FFF;
-}
-
-nav a {
+nav a, .dropdown-title {
   padding: 12px 6px;
-  font: bold 0.75rem Verdana;
+  font: bold 0.85rem Verdana;
+  color: #fff;
   text-decoration: none;
   outline: 0;
   transition: 280ms ease-out 120ms;
-}
-
-nav > a,
-.dropdown-title {
   border-top: 2px solid #000;
-  margin-top: -2px;
 }
-
-nav > a:hover,
+nav a:hover,
 #dropdown:hover .dropdown-title,
-nav > a:focus,
+nav a:focus,
 #dropdown:focus-within .dropdown-title,
 #current {
   border-top-color: #A00;
 }
-
+#dropdown {
+  position: relative;
+}
 #dropdown a {
   display: block;
 }
-
 .dropdown-title::after {
   content: '';
   display: inline-block;
@@ -69,117 +97,185 @@ nav > a:focus,
   border-width: 0 1px 1px 0;
   padding: 2px;
   transform: translateY(-50%) rotate(45deg);
-  margin-left: 1ch;
+  margin-left: 4px;
 }
-
 #submenu-container {
-  display: grid;
+  display: none;
   position: absolute;
+  top: 100%;
+  left: 0;
+  width: max-content;
 }
-
+#dropdown:focus-within #submenu-container,
+#dropdown:hover #submenu-container {
+  display: block;
+}
 #submenu {
-  height: 0;
-  overflow: hidden;
   background: #333;
-  transition: 280ms ease-out 120ms;
 }
-
-#dropdown:hover #submenu,
-#dropdown:focus-within #submenu {
-  height: 100%;
-}
-
 #submenu a:hover,
 #submenu a:focus {
   background: #A00;
 }
 
-main,
-form div {
+/* Hero Section с анимированным градиентом и частицами */
+#hero {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+#particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.hero-overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  animation: fadeIn 2s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-overlay h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.hero-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+#scrollDown {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #1d72b8;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+#scrollDown:hover {
+  transform: scale(1.05);
 }
 
-form {
-  margin: 32px auto;
+/* Основной контент – калькулятор */
+main#calculator {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
 }
-
-form h1 {
-  font-size: 1rem;
-  margin-bottom: 18px;
-  margin-left: 12px;
+main#calculator form {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-
+main#calculator form h1 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
 fieldset {
   margin: 0 0 16px;
-  padding: 12px 12px 0;
+  padding: 12px;
   border: 1px solid #CCC;
-  background: linear-gradient(#FFF, #CCC);
+  background: linear-gradient(#FFF, #EEE);
+  border-radius: 4px;
 }
-
-form h1,
-legend,
-input,
-output,
-button {
-  font-family: Arial;
-}
-
-form h1,
-legend,
-button {
+fieldset legend {
+  padding: 0 4px;
+  font-size: 1rem;
   color: #333;
 }
-
-legend {
-  padding: 0 4px;
-  font-size: 0.875rem;
-}
-
-input,
-button,
-div output {
-  font-size: 0.833rem;
-}
-
-input {
+fieldset input {
   width: 4em;
+  margin: 4px;
+  font-size: 1rem;
 }
-
-input:invalid {
-  outline: 1px solid #F00;
-}
-
-output {
-  color: #C00;
-}
-
 fieldset output {
   display: block;
-  margin: 8px 0 8px 6px;
-  font-size: 0.75rem;
+  margin: 8px 0 0 4px;
+  font-size: 0.9rem;
+  color: #C00;
+}
+.form-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.form-buttons button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #1d72b8;
+  color: #fff;
+  transition: transform 0.3s;
+}
+.form-buttons button:hover {
+  transform: scale(1.05);
+}
+.form-buttons output.final-output {
+  font-weight: bold;
+  margin-left: 10px;
 }
 
-fieldset output::after {
-  content: "\00A0";
-}
-
-/* a placeholder */
-
-div output {
-  margin: auto auto auto 6px;
-}
-
+/* Футер */
 footer {
-  padding: 12px;
   background: #333;
-  font: 0.75rem Arial;
   color: #FFF;
+  padding: 12px;
+  text-align: center;
 }
-
 footer a {
-  text-underline-position: under;
+  color: #FFD700;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+footer address {
+  float: right;
+  font-style: normal;
+  margin-right: 10px;
 }
 
-address {
-  float: right;
+/* Кнопка «Прокрутить наверх» */
+#scrollToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #1d72b8;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1500;
+}
+#scrollToTop.active {
+  opacity: 1;
 }
