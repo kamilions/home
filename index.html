@@ -11,27 +11,49 @@
 </head>
 
 <body>
+  <!-- Прелоадер -->
+  <div id="preloader">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+
+  <!-- Шапка с логотипом и заголовком -->
   <header>
-    <img src="logo.png" alt="Logo">
-    <h1>Class Activity Calculator</h1>
-  </header>
-  <nav>
-    <a href="/" id="current">Children</a>
-    <a href="teenagers">Teenagers</a>
-    <div id="dropdown">
-      <a tabindex="0" class="dropdown-title">Adults</a>
-      <div id="submenu-container">
-        <div id="submenu">
-          <a href="adults-elementary">Elementary</a>
-          <a href="adults-other">Other</a>
+    <div class="header-container">
+      <img src="logo.png" alt="Logo">
+      <h1>Class Activity Calculator</h1>
+    </div>
+    <!-- Навигация с выпадающим меню -->
+    <nav>
+      <a href="#" id="current">Children</a>
+      <a href="teenagers.html">Teenagers</a>
+      <div id="dropdown">
+        <a tabindex="0" class="dropdown-title">Adults</a>
+        <div id="submenu-container">
+          <div id="submenu">
+            <a href="adults-elementary.html">Elementary</a>
+            <a href="adults-other.html">Other</a>
+          </div>
         </div>
       </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section с анимированным фоном и частицами -->
+  <section id="hero">
+    <canvas id="particle-canvas"></canvas>
+    <div class="hero-overlay">
+      <h2>Calculate Your Class Activity Grade</h2>
+      <p>Effortlessly compute averages and get results instantly!</p>
+      <button id="scrollDown">Learn More</button>
     </div>
-  </nav>
-  <main>
+  </section>
+
+  <!-- Основной контент – секция с калькулятором -->
+  <main id="calculator">
     <form autocomplete="off">
       <h1>Children</h1>
-      <fieldset>
+      <fieldset data-weight="1">
         <legend>Listening</legend>
         <input type="number" step="any" min="0" max="60">
         <input type="number" step="any" min="0" max="60">
@@ -39,7 +61,7 @@
         <input type="number" step="any" min="0" max="60">
         <output></output>
       </fieldset>
-      <fieldset>
+      <fieldset data-weight="1">
         <legend>Speaking</legend>
         <input type="number" step="any" min="0" max="60">
         <input type="number" step="any" min="0" max="60">
@@ -47,7 +69,7 @@
         <input type="number" step="any" min="0" max="60">
         <output></output>
       </fieldset>
-      <fieldset>
+      <fieldset data-weight="1">
         <legend>Reading</legend>
         <input type="number" step="any" min="0" max="60">
         <input type="number" step="any" min="0" max="60">
@@ -55,7 +77,7 @@
         <input type="number" step="any" min="0" max="60">
         <output></output>
       </fieldset>
-      <fieldset>
+      <fieldset data-weight="1">
         <legend>Writing</legend>
         <input type="number" step="any" min="0" max="60">
         <input type="number" step="any" min="0" max="60">
@@ -63,31 +85,39 @@
         <input type="number" step="any" min="0" max="60">
         <output></output>
       </fieldset>
-      <fieldset>
+      <fieldset data-weight="1">
         <legend>Behavior</legend>
         <input type="number" step="any" min="0" max="60">
         <input type="number" step="any" min="0" max="60">
         <output></output>
       </fieldset>
-      <fieldset>
+      <fieldset data-weight="1">
         <legend>Homework</legend>
         <input type="number" step="any" min="0" max="60">
         <input type="number" step="any" min="0" max="60">
         <output></output>
       </fieldset>
-      <div>
+      <div class="form-buttons">
         <button type="button">Calculate</button>
-        <output></output>
+        <output class="final-output"></output>
         <button type="reset">Reset</button>
       </div>
     </form>
   </main>
+
+  <!-- Футер со ссылками на соцсети и авторством -->
   <footer>
-    Share on <a href="https://t.me/share/url?url=https%3A%2F%2Fclassactivitycalculator.github.io&text=Class%20Activity%20Calculator%3A%20Calculate%20the%20class%20activity%20grades%20of%20the%20ILI%20students." target="_blank" title="Telegram: Share Web Page">Telegram</a> |
-    <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fclassactivitycalculator.github.io&t=Class%20Activity%20Calculator%3A%20Calculate%20the%20class%20activity%20grades%20of%20the%20ILI%20students." target="_blank" title="Post to Facebook">Facebook</a>
+    <div class="social">
+      Share on 
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fclassactivitycalculator.github.io&text=Class%20Activity%20Calculator%3A%20Calculate%20the%20class%20activity%20grades%20of%20the%20ILI%20students." target="_blank" title="Telegram">Telegram</a> |
+      <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fclassactivitycalculator.github.io&t=Class%20Activity%20Calculator%3A%20Calculate%20the%20class%20activity%20grades%20of%20the%20ILI%20students." target="_blank" title="Facebook">Facebook</a>
+    </div>
     <address>Created by <a href="https://mori.pages.dev" title="Mori" rel="author">Mori</a></address>
   </footer>
-  <script src="script.js"></script>
-</body>
 
+  <!-- Кнопка возврата наверх -->
+  <button id="scrollToTop">&#8679;</button>
+
+  <script src="script.js" defer></script>
+</body>
 </html>
