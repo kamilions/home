@@ -20,8 +20,8 @@ app.post('/api/chat', async (req, res) => {
   }
 
   try {
-    const response = await axios.post('https://api.openai.com/v1/completions', {
-      model: 'text-davinci-003',
+    const response = await axios.post('https://generativelanguage.googleapis.com/v1beta/models/', {
+      model: 'gemini-2.0-pro-exp-02-05',
       prompt: message,
       max_tokens: 150,
       temperature: 0.7
@@ -40,5 +40,5 @@ app.post('/api/chat', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Сервер запущен: http://localhost:${port}`);
+  console.log(`Сервер запущен на: http://localhost:${port}`);
 });
