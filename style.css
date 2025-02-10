@@ -1,0 +1,185 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 16px 0;
+  text-align: center;
+  background: linear-gradient(#999, #333);
+}
+
+img {
+  width: 36px;
+  height: 36px;
+  vertical-align: bottom;
+}
+
+header h1 {
+  font-size: 1.25rem;
+  font-family: 'Times New Roman';
+  color: #FFF;
+  text-shadow: 0 3px #000;
+  letter-spacing: 1px;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  column-gap: 15px;
+  background: #333;
+  border-top: 2px solid #000;
+}
+
+a {
+  color: #FFF;
+}
+
+nav a {
+  padding: 12px 6px;
+  font: bold 0.75rem Verdana;
+  text-decoration: none;
+  outline: 0;
+  transition: 280ms ease-out 120ms;
+}
+
+nav > a,
+.dropdown-title {
+  border-top: 2px solid #000;
+  margin-top: -2px;
+}
+
+nav > a:hover,
+#dropdown:hover .dropdown-title,
+nav > a:focus,
+#dropdown:focus-within .dropdown-title,
+#current {
+  border-top-color: #A00;
+}
+
+#dropdown a {
+  display: block;
+}
+
+.dropdown-title::after {
+  content: '';
+  display: inline-block;
+  border-style: solid;
+  border-width: 0 1px 1px 0;
+  padding: 2px;
+  transform: translateY(-50%) rotate(45deg);
+  margin-left: 1ch;
+}
+
+#submenu-container {
+  display: grid;
+  position: absolute;
+}
+
+#submenu {
+  height: 0;
+  overflow: hidden;
+  background: #333;
+  transition: 280ms ease-out 120ms;
+}
+
+#dropdown:hover #submenu,
+#dropdown:focus-within #submenu {
+  height: 100%;
+}
+
+#submenu a:hover,
+#submenu a:focus {
+  background: #A00;
+}
+
+main,
+form div {
+  display: flex;
+}
+
+form {
+  margin: 32px auto;
+}
+
+form h1 {
+  font-size: 1rem;
+  margin-bottom: 18px;
+  margin-left: 12px;
+}
+
+fieldset {
+  margin: 0 0 16px;
+  padding: 12px 12px 0;
+  border: 1px solid #CCC;
+  background: linear-gradient(#FFF, #CCC);
+}
+
+form h1,
+legend,
+input,
+output,
+button {
+  font-family: Arial;
+}
+
+form h1,
+legend,
+button {
+  color: #333;
+}
+
+legend {
+  padding: 0 4px;
+  font-size: 0.875rem;
+}
+
+input,
+button,
+div output {
+  font-size: 0.833rem;
+}
+
+input {
+  width: 4em;
+}
+
+input:invalid {
+  outline: 1px solid #F00;
+}
+
+output {
+  color: #C00;
+}
+
+fieldset output {
+  display: block;
+  margin: 8px 0 8px 6px;
+  font-size: 0.75rem;
+}
+
+fieldset output::after {
+  content: "\00A0";
+}
+
+/* a placeholder */
+
+div output {
+  margin: auto auto auto 6px;
+}
+
+footer {
+  padding: 12px;
+  background: #333;
+  font: 0.75rem Arial;
+  color: #FFF;
+}
+
+footer a {
+  text-underline-position: under;
+}
+
+address {
+  float: right;
+}
