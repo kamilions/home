@@ -11,48 +11,47 @@
 </head>
 
 <body>
-  <!-- Прелоадер -->
+  <!-- Preloader -->
   <div id="preloader">
     <div class="spinner"></div>
-    <p>Loading...</p>
+    <p>Загрузка...</p>
   </div>
-
-  <!-- Шапка с логотипом и заголовком -->
+  
+  <!-- Фиксированное меню с логотипом и навигацией -->
   <header>
-    <div class="header-container">
+    <div class="header-top">
       <img src="logo.png" alt="Logo">
       <h1>Class Activity Calculator</h1>
     </div>
-    <!-- Навигация с выпадающим меню -->
     <nav>
-      <a href="#" id="current">Children</a>
-      <a href="teenagers.html">Teenagers</a>
-      <div id="dropdown">
-        <a tabindex="0" class="dropdown-title">Adults</a>
-        <div id="submenu-container">
-          <div id="submenu">
-            <a href="adults-elementary.html">Elementary</a>
-            <a href="adults-other.html">Other</a>
-          </div>
-        </div>
-      </div>
+      <ul>
+        <li><a href="#calculator" id="current">Children</a></li>
+        <li><a href="teenagers.html">Teenagers</a></li>
+        <li id="dropdown">
+          <a href="#" class="dropdown-title">Adults</a>
+          <ul>
+            <li><a href="adults-elementary.html">Elementary</a></li>
+            <li><a href="adults-other.html">Other</a></li>
+          </ul>
+        </li>
+      </ul>
     </nav>
   </header>
-
-  <!-- Hero Section с анимированным фоном и частицами -->
+  
+  <!-- Hero Section с анимированным градиентом и частицами -->
   <section id="hero">
     <canvas id="particle-canvas"></canvas>
-    <div class="hero-overlay">
-      <h2>Calculate Your Class Activity Grade</h2>
-      <p>Effortlessly compute averages and get results instantly!</p>
-      <button id="scrollDown">Learn More</button>
+    <div class="hero-content">
+      <h1>Добро пожаловать в Class Activity Calculator!</h1>
+      <p>Посчитайте оценки активности учеников быстро и легко.</p>
+      <button id="scrollToCalculator">Перейти к калькулятору</button>
     </div>
   </section>
-
-  <!-- Основной контент – секция с калькулятором -->
-  <main id="calculator">
+  
+  <!-- Секция калькулятора -->
+  <section id="calculator">
+    <h2>Children</h2>
     <form autocomplete="off">
-      <h1>Children</h1>
       <fieldset data-weight="1">
         <legend>Listening</legend>
         <input type="number" step="any" min="0" max="60">
@@ -97,27 +96,207 @@
         <input type="number" step="any" min="0" max="60">
         <output></output>
       </fieldset>
-      <div class="form-buttons">
+      <div>
         <button type="button">Calculate</button>
         <output class="final-output"></output>
         <button type="reset">Reset</button>
       </div>
     </form>
-  </main>
-
-  <!-- Футер со ссылками на соцсети и авторством -->
-  <footer>
+  </section>
+  
+  <!-- Footer -->
+  <footer id="footer">
+    <p>&copy; 2025 Class Activity Calculator. Все права защищены.</p>
     <div class="social">
       Share on 
-      <a href="https://t.me/share/url?url=https%3A%2F%2Fclassactivitycalculator.github.io&text=Class%20Activity%20Calculator%3A%20Calculate%20the%20class%20activity%20grades%20of%20the%20ILI%20students." target="_blank" title="Telegram">Telegram</a> |
-      <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fclassactivitycalculator.github.io&t=Class%20Activity%20Calculator%3A%20Calculate%20the%20class%20activity%20grades%20of%20the%20ILI%20students." target="_blank" title="Facebook">Facebook</a>
+      <a href="https://t.me/share/url?url=https%3A%2F%2Fclassactivitycalculator.github.io" target="_blank" title="Telegram">Telegram</a> |
+      <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fclassactivitycalculator.github.io" target="_blank" title="Facebook">Facebook</a>
     </div>
     <address>Created by <a href="https://mori.pages.dev" title="Mori" rel="author">Mori</a></address>
   </footer>
-
+  
   <!-- Кнопка возврата наверх -->
   <button id="scrollToTop">&#8679;</button>
-
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      /* Прелоадер: исчезает после загрузки страницы */
+      window.addEventListener("load", function() {
+        const preloader = document.getElementById("preloader");
+        preloader.style.transition = "opacity 0.5s ease-out";
+        preloader.style.opacity = "0";
+        setTimeout(function() {
+          preloader.style.display = "none";
+        }, 500);
+      });
+      
+      /* Плавная прокрутка для навигационных ссылок (если ссылка-якорь) */
+      document.querySelectorAll("nav ul li a").forEach(link => {
+        link.addEventListener("click", function(e) {
+          if(this.getAttribute("href").startsWith("#")){
+            e.preventDefault();
+            const targetId = this.getAttribute("href").substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+              targetSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+      
+      /* Плавная прокрутка для кнопки "Перейти к калькулятору" */
+      document.getElementById("scrollToCalculator").addEventListener("click", function() {
+        document.getElementById("calculator").scrollIntoView({ behavior: "smooth" });
+      });
+      
+      /* Параллакс-эффект для контента в hero */
+      window.addEventListener("scroll", () => {
+        const heroContent = document.querySelector(".hero-content");
+        let scrolled = window.pageYOffset;
+        if(heroContent) {
+          heroContent.style.transform = "translateY(" + (scrolled * 0.5) + "px)";
+        }
+        const scrollBtn = document.getElementById("scrollToTop");
+        if (window.pageYOffset > 300) {
+          scrollBtn.classList.add("active");
+        } else {
+          scrollBtn.classList.remove("active");
+        }
+      });
+      
+      /* Частицы в canvas */
+      const canvas = document.getElementById("particle-canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      let particles = [];
+      const particleCount = 100;
+      
+      function Particle(x, y, dx, dy, size, color) {
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+        this.size = size;
+        this.color = color;
+      }
+      Particle.prototype.draw = function() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      };
+      Particle.prototype.update = function() {
+        if (this.x + this.size > canvas.width || this.x - this.size < 0) {
+          this.dx = -this.dx;
+        }
+        if (this.y + this.size > canvas.height || this.y - this.size < 0) {
+          this.dy = -this.dy;
+        }
+        this.x += this.dx;
+        this.y += this.dy;
+        this.draw();
+      };
+      
+      function initParticles() {
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+          let size = Math.random() * 3 + 1;
+          let x = Math.random() * (canvas.width - size * 2) + size;
+          let y = Math.random() * (canvas.height - size * 2) + size;
+          let dx = (Math.random() - 0.5) * 2;
+          let dy = (Math.random() - 0.5) * 2;
+          let color = "rgba(255,255,255,0.8)";
+          particles.push(new Particle(x, y, dx, dy, size, color));
+        }
+      }
+      function animateParticles() {
+        requestAnimationFrame(animateParticles);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(particle => particle.update());
+      }
+      initParticles();
+      animateParticles();
+      window.addEventListener("resize", function() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initParticles();
+      });
+      
+      /* Логика калькулятора */
+      const form = document.querySelector("form");
+      
+      function averageInputValues(fieldset) {
+        let totalValue = 0;
+        let count = 0;
+        const inputs = fieldset.querySelectorAll("input");
+        for (let input of inputs) {
+          if (!input.validity.valid || input.value === "") {
+            return;
+          }
+          totalValue += Number(input.value);
+          count++;
+        }
+        return totalValue / count;
+      }
+      
+      function setOutputValues() {
+        const max = form.querySelector("input").max;
+        let totalWeightedAverage = 0;
+        let totalWeight = 0;
+        const fieldsets = form.querySelectorAll("fieldset");
+        for (let fieldset of fieldsets) {
+          const average = averageInputValues(fieldset);
+          const fieldsetOutput = fieldset.querySelector("output");
+          if (average === undefined) {
+            fieldsetOutput.value = "Enter grade between 0 and " + max;
+          } else if (isNaN(average)) {
+            fieldsetOutput.value = "Please enter a grade.";
+          } else {
+            fieldsetOutput.value = "avg: " + average.toFixed(1);
+          }
+          let weight = fieldset.dataset.weight;
+          if (!weight) { weight = 1; }
+          totalWeightedAverage += (average || 0) * weight;
+          totalWeight += Number(weight);
+        }
+        const classActivity = totalWeightedAverage / totalWeight;
+        const outputFinal = form.querySelector(".final-output");
+        if (isNaN(classActivity)) {
+          outputFinal.value = "";
+        } else {
+          outputFinal.value = "CA: " + classActivity.toFixed(1);
+        }
+      }
+      
+      form.querySelector('[type="button"]').addEventListener("click", setOutputValues);
+      
+      function detectChange() {
+        const inputs = form.querySelectorAll("input");
+        for (let input of inputs) {
+          if (input.value) return true;
+        }
+      }
+      form.addEventListener("reset", function(event) {
+        if (detectChange() && !confirm("Your changes will be lost.\nAre you sure you want to reset?")) {
+          event.preventDefault();
+        }
+      });
+      window.addEventListener("beforeunload", function(event) {
+        if (detectChange()) {
+          event.returnValue = "Your changes may be lost.";
+        }
+      });
+      
+      /* Кнопка возврата наверх */
+      document.getElementById("scrollToTop").addEventListener("click", function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+  </script>
+</body>
+</html>
   <script src="script.js" defer></script>
 </body>
 </html>
