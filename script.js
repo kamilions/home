@@ -1,71 +1,152 @@
-var form = document.querySelector('form');
+document.addEventListener("DOMContentLoaded", function() {
+  /* Preloader: скрытие после загрузки */
+  window.addEventListener("load", function() {
+    const preloader = document.getElementById("preloader");
+    preloader.style.transition = "opacity 0.5s ease-out";
+    preloader.style.opacity = "0";
+    setTimeout(function() {
+      preloader.style.display = "none";
+    }, 500);
+  });
 
-function averageInputValues(fieldset) {
-  var totalValue = 0;
-  var totalNumber = 0;
-  var inputs = fieldset.querySelectorAll('input');
-  for (var input of inputs) {
-    if (!input.validity.valid) {
-      return;
-    }
-    totalValue += Number(input.value);
-    totalNumber += Boolean(input.value);
-  }
-  return totalValue / totalNumber;
-}
+  /* Переключение темы */
+  document.getElementById("toggleTheme").addEventListener("click", function() {
+    document.body.classList.toggle("dark");
+  });
 
-function setOutputValues() {
-  var max = form.querySelector('input').max;
-  var totalWeightedAverage = 0;
-  var totalWeight = 0;
-  var fieldsets = form.querySelectorAll('fieldset');
-  for (var fieldset of fieldsets) {
-    var average = averageInputValues(fieldset);
-    var fieldsetOutput = fieldset.querySelector('output');
-    if (average == undefined) {
-      fieldsetOutput.value = 'You may only enter 0 to ' + max + '.';
-    } else if (isNaN(average)) {
-      fieldsetOutput.value = 'Please enter a grade.';
+  /* Плавная прокрутка при клике на меню */
+  document.querySelectorAll("nav ul li a").forEach(link => {
+    link.addEventListener("click", function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href").substring(1);
+      const targetSection = document.getElementById(targetId);
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  });
+
+  /* Параллакс-эффект для hero-контента */
+  window.addEventListener("scroll", () => {
+    const heroContent = document.querySelector(".hero-content");
+    let scrolled = window.pageYOffset;
+    heroContent.style.transform = "translateY(" + (scrolled * 0.5) + "px)";
+
+    // Отображение кнопки возврата наверх
+    const scrollBtn = document.getElementById("scrollToTop");
+    if (window.pageYOffset > 300) {
+      scrollBtn.classList.add("active");
     } else {
-      fieldsetOutput.value = 'avg: ' + average.toFixed(1);
+      scrollBtn.classList.remove("active");
     }
-    var weight = fieldset.dataset.weight;
-    if (!weight) {
-      weight = 1;
+  });
+
+  /* Анимация частиц на canvas */
+  const canvas = document.getElementById("particle-canvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+  const particleCount = 100;
+
+  function Particle(x, y, dx, dy, size, color) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.size = size;
+    this.color = color;
+  }
+
+  Particle.prototype.draw = function() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  };
+
+  Particle.prototype.update = function() {
+    if (this.x + this.size > canvas.width || this.x - this.size < 0) {
+      this.dx = -this.dx;
     }
-    totalWeightedAverage += average * weight;
-    totalWeight += Number(weight);
-  }
-  var classActivity = totalWeightedAverage / totalWeight;
-  var divOutput = form.querySelector('div output');
-  if (isNaN(classActivity)) {
-    divOutput.value = '';
-  } else if (max == 5) { // Adults: New
-    divOutput.value = 'CA: ' + (classActivity * 100 / max).toFixed(1); // The class activity grade must be calculated out of 100.
-  } else {
-    divOutput.value = 'CA: ' + classActivity.toFixed(1);
-  }
-}
+    if (this.y + this.size > canvas.height || this.y - this.size < 0) {
+      this.dy = -this.dy;
+    }
+    this.x += this.dx;
+    this.y += this.dy;
+    this.draw();
+  };
 
-form.querySelector('[type="button"]').addEventListener('click', setOutputValues);
-
-function detectChange() {
-  var inputs = form.querySelectorAll('input');
-  for (var input of inputs) {
-    if (input.value) {
-      return true;
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+      let size = Math.random() * 3 + 1;
+      let x = Math.random() * (canvas.width - 2 * size) + size;
+      let y = Math.random() * (canvas.height - 2 * size) + size;
+      let dx = (Math.random() - 0.5) * 2;
+      let dy = (Math.random() - 0.5) * 2;
+      let color = "rgba(255,255,255,0.8)";
+      particles.push(new Particle(x, y, dx, dy, size, color));
     }
   }
-}
 
-form.addEventListener('reset', function(event) {
-  if (detectChange() && !confirm('Your changes will be lost.\nAre you sure you want to reset?')) {
-    event.preventDefault();
+  function animateParticles() {
+    requestAnimationFrame(animateParticles);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(particle => particle.update());
   }
-});
 
-window.addEventListener('beforeunload', function(event) {
-  if (detectChange()) {
-    event.returnValue = 'Your changes may be lost.';
-  }
+  initParticles();
+  animateParticles();
+
+  window.addEventListener("resize", function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initParticles();
+  });
+
+  /* IntersectionObserver для появления элементов */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(".feature-card, .service-card, .gallery-item").forEach(item => {
+    observer.observe(item);
+  });
+
+  /* Обработка модального окна (открытие по клику на карточку) */
+  const modal = document.getElementById("modal");
+  const closeModalBtn = document.querySelector(".close-button");
+  document.querySelectorAll(".feature-card, .service-card").forEach(card => {
+    card.addEventListener("click", function() {
+      modal.style.display = "block";
+    });
+  });
+  closeModalBtn.addEventListener("click", function() {
+    modal.style.display = "none";
+  });
+  window.addEventListener("click", function(e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  /* Слайдер отзывов */
+  const testimonials = document.querySelectorAll(".testimonial");
+  let currentTestimonial = 0;
+  setInterval(function() {
+    testimonials[currentTestimonial].classList.remove("active");
+    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+    testimonials[currentTestimonial].classList.add("active");
+  }, 5000);
+
+  /* Кнопка возврата наверх */
+  document.getElementById("scrollToTop").addEventListener("click", function() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 });
