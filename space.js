@@ -35,15 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
   
   updateAnimationSpeed();
 
-  // Эффект звезд при движении мыши
+  // Эффект звезд при движении мыши: создается маленькая звезда в точке курсора
   document.addEventListener('mousemove', function(e) {
     const star = document.createElement('div');
     star.className = 'mouse-star';
-    // Центрируем маленькую звезду относительно курсора
     star.style.top = (e.pageY - 2.5) + 'px';
     star.style.left = (e.pageX - 2.5) + 'px';
     document.body.appendChild(star);
-    // Удаляем элемент после завершения анимации (0.8s)
     setTimeout(() => star.remove(), 800);
   });
 });
