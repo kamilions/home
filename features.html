@@ -1,77 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Симуляция Солнечной системы в космической тематике с анимированным звездным фоном и подробной информацией о планетах.">
   <title>Космос – Симуляция Солнечной системы</title>
+  <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="space.css">
 </head>
 <body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
+    <p>Загрузка...</p>
+  </div>
+  
+  <!-- Анимированный звездный фон -->
+  <div class="starfield"></div>
+  
+  <!-- Фиксированное меню -->
   <header>
-    <h1>Космический портал</h1>
     <nav>
       <ul>
         <li><a href="index.html">Главная</a></li>
-        <li><a href="space.html">Космос</a></li>
-        <li><a href="valentine.html">День влюблённых</a></li>
+        <li><a href="love.html">День влюбленных</a></li>
+        <li><a href="features.html">Фишки</a></li>
+        <li><a href="space.html" class="active">Космос</a></li>
+        <li><a href="#footer">Контакты</a></li>
       </ul>
     </nav>
   </header>
-  <main>
-    <!-- Обёртка для симуляции, обеспечивающая центровку -->
+  
+  <!-- Основной контент: Симуляция Солнечной системы -->
+  <section id="simulation">
     <div class="simulation-container">
       <div class="solar-system">
-        <!-- Солнце -->
+        <!-- Солнце с пульсирующим эффектом -->
         <div class="sun">
           <div class="sun-label">Sun</div>
         </div>
-        <!-- Орбиты и планеты -->
+        <!-- Орбиты и планеты с подробной информацией -->
         <div class="orbit mercury">
           <div class="planet">
             <div class="sphere mercury-sphere"></div>
             <div class="planet-name">Mercury</div>
+            <div class="planet-info">
+              Меркурий — самая близкая к Солнцу планета. Его поверхность переживает огромные перепады температур, а атмосфера почти отсутствует.
+            </div>
           </div>
         </div>
         <div class="orbit venus">
           <div class="planet">
             <div class="sphere venus-sphere"></div>
             <div class="planet-name">Venus</div>
+            <div class="planet-info">
+              Венера — вторая планета от Солнца, известная своей плотной атмосферой и экстремальными температурами, что делает её самой горячей планетой.
+            </div>
           </div>
         </div>
         <div class="orbit earth">
           <div class="planet">
             <div class="sphere earth-sphere"></div>
             <div class="planet-name">Earth</div>
+            <div class="planet-info">
+              Земля — единственная планета, на которой известна жизнь. Богатая биосферой, водой и атмосферой, она является домом для множества экосистем.
+            </div>
           </div>
         </div>
         <div class="orbit mars">
           <div class="planet">
             <div class="sphere mars-sphere"></div>
             <div class="planet-name">Mars</div>
+            <div class="planet-info">
+              Марс, «красная планета», привлекает внимание учёных своей возможной пригодностью для будущего освоения и исследованием следов древней воды.
+            </div>
           </div>
         </div>
         <div class="orbit jupiter">
           <div class="planet">
             <div class="sphere jupiter-sphere"></div>
             <div class="planet-name">Jupiter</div>
+            <div class="planet-info">
+              Юпитер — самая крупная планета Солнечной системы. Его мощное магнитное поле, многочисленные спутники и знаменитое Большое Красное Пятно делают его уникальным.
+            </div>
           </div>
         </div>
         <div class="orbit saturn">
           <div class="planet">
             <div class="sphere saturn-sphere"></div>
             <div class="planet-name">Saturn</div>
+            <div class="planet-info">
+              Сатурн знаменит своими кольцами, которые состоят из льда и камней, а также многочисленными спутниками, каждый из которых интересен по-своему.
+            </div>
           </div>
         </div>
         <div class="orbit uranus">
           <div class="planet">
             <div class="sphere uranus-sphere"></div>
             <div class="planet-name">Uranus</div>
+            <div class="planet-info">
+              Уран — газово-ледяная планета с уникальным наклоном оси почти на 98°. Его холодная атмосфера и необычный вид привлекают внимание исследователей.
+            </div>
           </div>
         </div>
         <div class="orbit neptune">
           <div class="planet">
             <div class="sphere neptune-sphere"></div>
             <div class="planet-name">Neptune</div>
+            <div class="planet-info">
+              Нептун — самая дальняя от Солнца планета, известная своими сильными ветрами и штормами, а также красивым голубым цветом.
+            </div>
           </div>
         </div>
       </div>
@@ -83,49 +121,14 @@
         <button id="toggleBtn">Пауза</button>
       </div>
     </div>
-  </main>
-  <footer>
+  </section>
+  
+  <!-- Footer -->
+  <footer id="footer">
     <p>&copy; 2025 Ваш сайт. Все права защищены.</p>
   </footer>
   
-  <script>
-    // После загрузки DOM задаём базовые длительности анимаций для орбит
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelector('.orbit.mercury').setAttribute('data-base-duration', 5);
-      document.querySelector('.orbit.venus').setAttribute('data-base-duration', 7);
-      document.querySelector('.orbit.earth').setAttribute('data-base-duration', 10);
-      document.querySelector('.orbit.mars').setAttribute('data-base-duration', 12);
-      document.querySelector('.orbit.jupiter').setAttribute('data-base-duration', 15);
-      document.querySelector('.orbit.saturn').setAttribute('data-base-duration', 18);
-      document.querySelector('.orbit.uranus').setAttribute('data-base-duration', 20);
-      document.querySelector('.orbit.neptune').setAttribute('data-base-duration', 22);
-      
-      const speedSlider = document.getElementById('speed');
-      const toggleBtn = document.getElementById('toggleBtn');
-      let isPaused = false;
-      
-      function updateAnimationSpeed() {
-        const speed = speedSlider.value;
-        const orbits = document.querySelectorAll('.orbit');
-        orbits.forEach(orbit => {
-          const baseDuration = orbit.getAttribute('data-base-duration');
-          orbit.style.animationDuration = (baseDuration / speed) + 's';
-        });
-      }
-      
-      speedSlider.addEventListener('input', updateAnimationSpeed);
-      
-      toggleBtn.addEventListener('click', () => {
-        isPaused = !isPaused;
-        const orbits = document.querySelectorAll('.orbit');
-        orbits.forEach(orbit => {
-          orbit.style.animationPlayState = isPaused ? 'paused' : 'running';
-        });
-        toggleBtn.textContent = isPaused ? 'Продолжить' : 'Пауза';
-      });
-      
-      updateAnimationSpeed();
-    });
-  </script>
+  <!-- Подключение внешнего JavaScript файла -->
+  <script src="space.js"></script>
 </body>
 </html>
